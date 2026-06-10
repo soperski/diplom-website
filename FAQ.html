@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - Морепродукты Релгрос</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
+                        url('https://images.unsplash.com/photo-1556702565-0d0f0d1a40a5?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #2c3e50;
+    }
+    
+    .logo span {
+      color: #3498db;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    
+    #nav-menu {
+      display: flex;
+    }
+    
+    #nav-menu a {
+      margin-left: 2rem;
+      font-weight: 600;
+      position: relative;
+      padding: 8px 0;
+    }
+    
+    #nav-menu a:hover {
+      color: #3498db;
+    }
+    
+    .faq-hero {
+      background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), 
+                  url('https://images.unsplash.com/photo-1564759077034-936b00d658e6?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+    }
+    
+    .faq-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .faq-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+    }
+    
+    .search-container {
+      max-width: 700px;
+      margin: 2rem auto 3rem;
+      position: relative;
+    }
+    
+    .search-box {
+      width: 100%;
+      padding: 18px 20px;
+      border: 2px solid #3498db;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .search-box:focus {
+      outline: none;
+      border-color: #2980b9;
+      box-shadow: 0 5px 20px rgba(52, 152, 219, 0.3);
+    }
+    
+    .search-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .search-btn:hover {
+      background: #2980b9;
+      transform: scale(1.05);
+    }
+    
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+    
+    .faq-category {
+      margin-bottom: 3rem;
+    }
+    
+    .faq-category h2 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 3px solid #3498db;
+      display: inline-block;
+      font-size: 1.8rem;
+    }
+    
+    .faq-item {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-item:hover {
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+    }
+    
+    .faq-question {
+      padding: 20px 25px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+    
+    .faq-question:hover {
+      background: #f8f9fa;
+    }
+    
+    .faq-question::after {
+      content: '\f078';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-question::after {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      padding: 0 25px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+      color: #555;
+      line-height: 1.8;
+    }
+    
+    .faq-item.active .faq-answer {
+      padding: 20px 25px;
+      max-height: 1000px;
+    }
+    
+    .contact-promo {
+      background: #3498db;
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      margin-bottom: 4rem;
+      border-radius: 15px;
+    }
+    
+    .contact-promo h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2.2rem;
+    }
+    
+    .contact-promo p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+    }
+    
+    .contact-btn {
+      display: inline-block;
+      background: white;
+      color: #3498db;
+      padding: 14px 35px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      background: #f1f8ff;
+    }
+    
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-section h3 {
+      margin-bottom: 1.2rem;
+      font-size: 1.3rem;
+      color: #3498db;
+    }
+    
+    .footer-section p, .footer-section a {
+      margin-bottom: 0.7rem;
+      display: block;
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+    
+    .footer-section a:hover {
+      color: #3498db;
+      text-decoration: underline;
+    }
+    
+    .copyright {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .faq-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .faq-question {
+        padding: 15px 20px;
+        font-size: 1.1rem;
+      }
+      
+      .faq-item.active .faq-answer {
+        padding: 15px 20px;
+      }
+      
+      .contact-promo {
+        padding: 3rem 1.5rem;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container nav-wrapper">
+      <div class="logo">Рел<span>грос</span></div>
+      <nav id="nav-menu">
+        <a href="index.html">Главная</a>
+        <a href="#products">Товары</a>
+        <a href="#about">О компании</a>
+        <a href="kontakti.html">Контакты</a>
+        <a href="faq.html" style="color: #3498db;">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="faq-hero">
+    <div class="container">
+      <h1>Часто задаваемые вопросы</h1>
+      <p>Найдите ответы на самые популярные вопросы о наших продуктах и услугах</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="search-container">
+      <input type="text" class="search-box" placeholder="Введите ваш вопрос...">
+      <button class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+    
+    <div class="faq-container">
+      <div class="faq-category">
+        <h2><i class="fas fa-truck"></i> Доставка</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">Как осуществляется доставка заказов?</div>
+          <div class="faq-answer">
+            <p>Мы осуществляем доставку по всей России с помощью партнерских транспортных компаний. В пределах Кемерово доставка осуществляется нашими курьерами в течение 2-4 часов после оформления заказа. Для других городов срок доставки составляет от 1 до 5 дней в зависимости от удаленности региона.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Каковы условия бесплатной доставки?</div>
+          <div class="faq-answer">
+            <p>Бесплатная доставка доступна для заказов от 5000 рублей по Кемерово. Для других городов бесплатная доставка предоставляется при заказе от 10000 рублей. Также мы предлагаем бесплатную доставку для постоянных клиентов по программе лояльности.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Можно ли изменить адрес доставки после оформления заказа?</div>
+          <div class="faq-answer">
+            <p>Да, вы можете изменить адрес доставки до момента отправки заказа. Для этого свяжитесь с нашим менеджером по телефону +7 (495) 430-32-91 или напишите на info@relgros.ru. После отправки заказа изменение адреса может быть затруднено.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-category">
+        <h2><i class="fas fa-credit-card"></i> Оплата</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">Какие способы оплаты вы принимаете?</div>
+          <div class="faq-answer">
+            <p>Мы предлагаем несколько удобных способов оплаты:</p>
+            <ul style="padding-left: 20px; margin: 15px 0;">
+              <li>Банковские карты (Visa, Mastercard, Мир)</li>
+              <li>Электронные кошельки (ЮMoney, QIWI)</li>
+              <li>Безналичный расчет для юридических лиц</li>
+              <li>Наличные при получении (только для Кемерово)</li>
+              <li>Онлайн-банкинг (Сбербанк Онлайн, Тинькофф и др.)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Можно ли оплатить заказ при получении?</div>
+          <div class="faq-answer">
+            <p>Да, для жителей Кемерово доступна оплата наличными или картой при получении заказа. Для других городов оплата при получении возможна только при выборе транспортной компании, поддерживающей данную опцию (например, СДЭК).</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Вы предоставляете документы для бухгалтерии?</div>
+          <div class="faq-answer">
+            <p>Да, мы предоставляем полный комплект документов: товарную накладную, счет-фактуру и договор поставки. Для юридических лиц также доступна электронная подпись документов. Все документы отправляются вместе с заказом или по электронной почте.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-category">
+        <h2><i class="fas fa-fish"></i> Продукция</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">Как обеспечивается свежесть морепродуктов?</div>
+          <div class="faq-answer">
+            <p>Мы сотрудничаем напрямую с рыболовецкими хозяйствами и поставщиками, что позволяет нам получать продукцию максимально быстро. Все морепродукты хранятся в специализированных холодильных камерах при температуре -2°C. Для доставки используются термоконтейнеры с хладагентами, что гарантирует сохранение свежести.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Есть ли у вас сертификаты качества?</div>
+          <div class="faq-answer">
+            <p>Да, вся наша продукция имеет необходимые сертификаты качества и соответствия. Мы строго соблюдаем санитарные нормы и регулярно проходим проверки Роспотребнадзора. По запросу мы можем предоставить копии сертификатов для любой партии товара.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Как хранить купленные морепродукты?</div>
+          <div class="faq-answer">
+            <p>Свежие морепродукты следует хранить в холодильнике при температуре от 0 до +2°C не более 2 суток. Для более длительного хранения рекомендуется заморозка при -18°C. Размораживать продукт следует постепенно в холодильнике. Не допускается повторная заморозка размороженных морепродуктов.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-category">
+        <h2><i class="fas fa-exchange-alt"></i> Возврат и гарантии</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">Что делать, если я получил некачественный товар?</div>
+          <div class="faq-answer">
+            <p>Если вы получили товар ненадлежащего качества, пожалуйста, немедленно свяжитесь с нами по телефону +7 (495) 430-32-91 или напишите на returns@relgros.ru. Мы организуем возврат и замену товара в кратчайшие сроки. Для решения вопроса нам потребуется фото товара и упаковки.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Каковы сроки возврата денежных средств?</div>
+          <div class="faq-answer">
+            <p>При отмене заказа до его отправки возврат денежных средств осуществляется в течение 1 рабочего дня. Если заказ уже был отправлен, возврат производится после получения товара обратно на наш склад. Срок возврата средств на банковскую карту составляет 3-10 рабочих дней в зависимости от банка.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Можно ли вернуть товар, если передумал?</div>
+          <div class="faq-answer">
+            <p>Согласно законодательству РФ, скоропортящиеся пищевые продукты (к которым относятся морепродукты) возврату и обмену не подлежат. Исключение составляют случаи, когда товар был доставлен ненадлежащего качества или с истекшим сроком годности.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="contact-promo">
+      <h2>Не нашли ответ на свой вопрос?</h2>
+      <p>Наша служба поддержки всегда готова помочь вам. Свяжитесь с нами удобным способом, и мы оперативно ответим на все ваши вопросы.</p>
+      <a href="kontakti.html" class="contact-btn">Связаться с нами</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>О компании</h3>
+          <p>Релгрос - поставщик свежих морепродуктов с 2008 года. Мы гарантируем качество и свежесть нашей продукции.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Контакты</h3>
+          <p>г. Кемерово, ул. Красноармейская, д. 41</p>
+          <a href="tel:+74954303291">+7 (495) 430-32-91</a>
+          <a href="mailto:info@relgros.ru">info@relgros.ru</a>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Часы работы</h3>
+          <p>Пн-Пт: 9:00-18:00</p>
+          <p>Сб: 10:00-16:00</p>
+          <p>Вс: выходной</p>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 «Релгрос». Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Функционал аккордеона
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      
+      question.addEventListener('click', () => {
+        // Закрываем все открытые элементы
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+          }
+        });
+        
+        // Переключаем текущий элемент
+        item.classList.toggle('active');
+      });
+    });
+    
+    // Поиск по FAQ
+    const searchBox = document.querySelector('.search-box');
+    
+    searchBox.addEventListener('input', () => {
+      const searchTerm = searchBox.value.toLowerCase();
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+          item.style.display = 'block';
+          
+          // Открываем элемент, если он содержит искомый термин
+          if (!item.classList.contains('active')) {
+            item.classList.add('active');
+          }
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+    
+    // Прокрутка к категории при клике на ссылку в URL
+    document.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+          setTimeout(() => {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Морепродукты «Релгрос»</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+ .hero {
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+
+                    url('hero1.jpg');
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-attachment: fixed;
+
+}
+
+
+
+    .product-card .btn-buy {
+
+      background-color: #0077b6 !important;
+
+      color: #ffffff !important;
+
+      border: none !important;
+
+      padding: 0.8rem 1.5rem !important;
+
+      border-radius: 5px !important;
+
+      font-weight: bold !important;
+
+      cursor: pointer !important;
+
+      transition: background-color 0.3s ease, transform 0.2s ease !important;
+
+      width: 100% !important;
+
+      margin-top: auto !important;
+
+    }
+
+
+
+    /* Эффект при наведении на кнопку "Купить" */
+
+    .product-card .btn-buy:hover {
+
+      background-color: #023e8a !important; /* Темно-синий при наведении */
+
+      transform: translateY(-2px) !important;
+
+    }
+
+
+
+    /* Эффект при клике */
+
+    .product-card .btn-buy:active {
+
+      transform: translateY(0) !important;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <div class="container nav-wrapper">
+
+      <div class="logo">Рел<span>грос</span></div>
+
+      <nav id="nav-menu">
+
+        <a href="#products">Товары</a>
+
+        <a href="#about">О компании</a>
+
+        <a href="kontakti.html">Контакты</a>
+
+        <a href="FAQ.html">FAQ</a>
+
+        <a href="sitemap.html">Карта сайта</a>
+
+        <a href="#" id="cart-toggle">Корзина</a>
+
+      </nav>
+
+     
+
+      <div class="nav-actions">
+
+        <nav>
+
+          <ul>
+
+            <li id="auth-buttons">
+
+              <a href="#login-modal" id="login-button">Вход</a>
+
+              <a href="#registration-modal" id="register-button">Регистрация</a>
+
+            </li>
+
+            <li id="user-info" class="hidden">
+
+              <div class="user-status">
+
+                <div class="user-avatar" id="user-avatar">U</div>
+
+                <span id="username-display">Пользователь</span>
+
+                <a href="kompani.html" class="lk-link" style="color: #023e8a; font-weight: bold; text-decoration: none; margin: 0 10px;">ЛК</a>
+
+                <button class="logout-btn" id="logout-button">Выйти</button>
+
+              </div>
+
+            </li>
+
+          </ul>
+
+        </nav>
+
+      </div>
+
+     
+
+      <div class="menu-toggle" id="menu-toggle" aria-label="Открыть меню" role="button" tabindex="0">
+
+        <div></div>
+
+        <div></div>
+
+        <div></div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+ 
+
+  <div id="login-modal" class="modal">
+
+    <div class="modal-content">
+
+      <span class="close" id="close-login">&times;</span>
+
+      <h2>Вход</h2>
+
+      <form id="login-form">
+
+        <div class="form-group">
+
+          <label for="login-email">Email:</label>
+
+          <input type="email" id="login-email" required>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="login-password">Пароль:</label>
+
+          <input type="password" id="login-password" required>
+
+        </div>
+
+        <button type="submit">Войти</button>
+
+        <div class="form-footer">
+
+          <p>Ещё нет аккаунта? <a href="#registration-modal" id="show-register">Зарегистрироваться</a></p>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <div id="registration-modal" class="modal">
+
+    <div class="modal-content">
+
+      <span class="close" id="close-registration">&times;</span>
+
+      <h2>Регистрация</h2>
+
+      <form id="registration-form">
+
+        <div class="form-group">
+
+          <label for="reg-username">Имя пользователя:</label>
+
+          <input type="text" id="reg-username" required>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="reg-email">Email:</label>
+
+          <input type="email" id="reg-email" required>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="reg-password">Пароль:</label>
+
+          <input type="password" id="reg-password" required>
+
+        </div>
+
+        <button type="submit">Зарегистрироваться</button>
+
+        <div class="form-footer">
+
+          <p>Уже есть аккаунт? <a href="#login-modal" id="show-login">Войти</a></p>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+ 
+
+  <div class="overlay" id="overlay"></div>
+
+
+
+  <section class="hero">
+
+    <div>
+
+      <h1>Свежие морепродукты прямо с моря к вашему столу</h1>
+
+      <p>Высокое качество, широкий ассортимент и быстрая доставка по всему городу</p>
+
+      <a href="#products" class="btn btn-primary">Выбрать продукты</a>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="products" id="products">
+
+    <h2>Наши продукты</h2>
+
+    <div class="product-list">
+
+      <div class="product-card">
+
+        <img src="https://image.fonwall.ru/o/ur/beach-sea-silhouette-cold.jpeg?auto=compress&fit=crop&w=1920&h=1080&domain=img3.fonwall.ru" alt="Лосось свежий" />
+
+        <div class="product-info">
+
+          <h3>Лосось</h3>
+
+          <p>Отборный лосось, богатый омега-3 жирами и вкусом моря.</p>
+
+          <div class="price">3200 ₽ / кг</div>
+
+          <button class="btn-buy" onclick="addToCart('Лосось', 3200, 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">Купить</button>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://image.fonwall.ru/o/gx/shrimps-food-seafood-meal.jpeg?auto=compress&fit=resize&w=1200&h=800&display=large&domain=img3.fonwall.ru" alt="Креветки" />
+
+        <div class="product-info">
+
+          <h3>Креветки</h3>
+
+          <p>Сочные и нежные креветки, идеально подходят для салатов и закусок.</p>
+
+          <div class="price">850 ₽ / кг</div>
+
+          <button class="btn-buy" onclick="addToCart('Креветки', 850, 'https://images.unsplash.com/photo-1605209671171-4257b1c93a6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">Купить</button>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://image.fonwall.ru/o/fg/open-white-ice-dish.jpeg?auto=compress&fit=resize&w=1200&display=large&domain=img1.fonwall.ru" alt="Мидии" />
+
+        <div class="product-info">
+
+          <h3>Мидии</h3>
+
+          <p>Свежие мидии из чистых вод, богаты белком и минералами.</p>
+
+          <div class="price">650 ₽ / кг</div>
+
+          <button class="btn-buy" onclick="addToCart('Мидии', 650, 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">Купить</button>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://storage.delikateska.ru/1/c/e1c640a1-3410-4550-aafe-2575e19d95a2.jpg" alt="Кальмары" />
+
+        <div class="product-info">
+
+          <h3>Кальмары</h3>
+
+          <p>Нежные кальмары, идеально подходят для жарки и супов.</p>
+
+          <div class="price">700 ₽ / кг</div>
+
+          <button class="btn-buy" onclick="addToCart('Кальмары', 700, 'https://images.unsplash.com/photo-1604335314871-1f1b4a6d1b8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">Купить</button>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://dikoed.ru//upload/iblock/222/97263-karakatitsa-tushenaya-s-ovoshchami-v-yogurte.png" alt="Каракатицы" />
+
+        <div class="product-info">
+
+          <h3>Каракатицы</h3>
+
+          <p>В мясе каракатицы содержится большое количество витаминов и полезных веществ</p>
+
+          <div class="price">1200 ₽ / кг</div>
+
+          <button class="btn-buy" onclick="addToCart('Каракатицы', 1200, 'https://images.unsplash.com/photo-1599490650239-1d4f5a5b0b8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">Купить</button>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://image.fonwall.ru/o/fj/crab-leaves-tasty-wallpaper.jpeg?auto=compress&fit=resize&w=1200&h=914&display=large&domain=img3.fonwall.ru" alt="Краб Камчатский" />
+
+        <div class="product-info">
+
+          <h3>Краб Камчатский</h3>
+
+          <p>Камчатский краб - это продукт высокого качества с содержанием мяса краба, воды и соли.</p>
+
+          <div class="price">2700 ₽ / кг</div>
+
+          <button class="btn-buy" onclick="addToCart('Краб Камчатский', 2700, 'https://images.unsplash.com/photo-1560963689-b9e9b4f7b2e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">Купить</button>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://storage.delikateska.ru/2/6/9f753585-d7a3-4ac5-836e-d81b5a7dd4b4.jpg" alt="Моллюски" />
+
+        <div class="product-info">
+
+          <h3>Моллюски</h3>
+
+          <p>Хищный моллюск с завитой красивой раковиной, благоприятный для организма человека.</p>
+
+          <div class="price">1100 ₽ / кг</div>
+
+          <button class="btn-buy" onclick="addToCart('Моллюски', 1100, 'https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">Купить</button>
+
+        </div>
+
+      </div>
+
+     
+
+    </div>
+
+  </section>
+
+
+
+  <section class="about" id="about">
+
+    <h2>О компании</h2>
+
+    <p>
+
+      ООО "РЕЛГРОС" - это российская компания, зарегистрированная в Кемерове в 2008 году.
+
+      Ее основным видом деятельности является оптовая торговля прочими пищевыми продуктами,
+
+      включая рыбу, ракообразных и моллюсков.
+
+    </p>
+
+    <p>
+
+      Мы гордимся тем, что предлагаем только самые свежие морепродукты, которые доставляются
+
+      напрямую с рыболовных судов. Наш ассортимент постоянно обновляется и расширяется,
+
+      чтобы удовлетворить потребности даже самых требовательных гурманов.
+
+    </p>
+
+    <p>
+
+      Мы гарантируем качество нашей продукции, соблюдение всех санитарных норм и быструю
+
+      доставку по всей России. Наша цель - сделать морепродукты доступными для каждого!
+
+    </p>
+
+  </section>
+
+
+
+  <footer>
+
+    &copy; 2026 «Релгрос». Все права защищены.
+
+  </footer>
+
+
+
+  <div class="cart" id="cart">
+
+    <h3>
+
+      Корзина
+
+      <button class="close-btn" id="close-cart">✖</button>
+
+    </h3>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-total" id="cart-total">Итого: 0 ₽</div>
+
+    <div class="cart-actions">
+
+      <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+
+      <button class="clear-btn" onclick="clearCart()">Очистить корзину</button>
+
+    </div>
+
+  </div>
+
+
+
+  <script>
+
+    let cart = [];
+
+    let currentUser = null;
+
+   
+
+    const cartToggle = document.getElementById('cart-toggle');
+
+    const cartDiv = document.getElementById('cart');
+
+    const closeCartBtn = document.getElementById('close-cart');
+
+    const overlay = document.getElementById('overlay');
+
+    const menuToggle = document.getElementById('menu-toggle');
+
+    const navMenu = document.getElementById('nav-menu');
+
+    const loginButton = document.getElementById('login-button');
+
+    const registerButton = document.getElementById('register-button');
+
+    const closeLogin = document.getElementById('close-login');
+
+    const closeRegistration = document.getElementById('close-registration');
+
+    const loginModal = document.getElementById('login-modal');
+
+    const registerModal = document.getElementById('registration-modal');
+
+    const loginForm = document.getElementById('login-form');
+
+    const registerForm = document.getElementById('registration-form');
+
+    const showRegister = document.getElementById('show-register');
+
+    const showLogin = document.getElementById('show-login');
+
+    const authButtons = document.getElementById('auth-buttons');
+
+    const userInfo = document.getElementById('user-info');
+
+    const userAvatar = document.getElementById('user-avatar');
+
+    const usernameDisplay = document.getElementById('username-display');
+
+    const logoutButton = document.getElementById('logout-button');
+
+   
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const savedUser = localStorage.getItem('currentUser');
+
+      if (savedUser) {
+
+        currentUser = JSON.parse(savedUser);
+
+        updateUserStatus();
+
+      }
+
+     
+
+      const savedCart = localStorage.getItem('cart');
+
+      if (savedCart) {
+
+        cart = JSON.parse(savedCart);
+
+        renderCart();
+
+      }
+
+    });
+
+   
+
+    function addToCart(product, price, image) {
+
+      const existingItem = cart.find(item => item.product === product);
+
+      if (existingItem) {
+
+        existingItem.quantity++;
+
+      } else {
+
+        cart.push({ product, price, image, quantity: 1 });
+
+      }
+
+      renderCart();
+
+      saveCartToStorage();
+
+     
+
+      cartDiv.classList.add('active');
+
+      overlay.style.display = 'block';
+
+    }
+
+   
+
+    function removeFromCart(product) {
+
+      const index = cart.findIndex(item => item.product === product);
+
+      if (index !== -1) {
+
+        cart.splice(index, 1);
+
+        renderCart();
+
+        saveCartToStorage();
+
+      }
+
+    }
+
+   
+
+    function updateQuantity(product, change) {
+
+      const item = cart.find(item => item.product === product);
+
+      if (item) {
+
+        item.quantity += change;
+
+        if (item.quantity <= 0) {
+
+          removeFromCart(product);
+
+        } else {
+
+          renderCart();
+
+          saveCartToStorage();
+
+        }
+
+      }
+
+    }
+
+   
+
+    function clearCart() {
+
+      cart = [];
+
+      renderCart();
+
+      saveCartToStorage();
+
+    }
+
+   
+
+    function renderCart() {
+
+      const cartItemsDiv = document.getElementById('cart-items');
+
+      if (!cartItemsDiv) return;
+
+      cartItemsDiv.innerHTML = '';
+
+      let total = 0;
+
+     
+
+      if (cart.length === 0) {
+
+        cartItemsDiv.innerHTML = '<p>Корзина пуста</p>';
+
+        document.getElementById('cart-total').innerText = `Итого: 0 ₽`;
+
+        return;
+
+      }
+
+     
+
+      cart.forEach(item => {
+
+        const itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+       
+
+        const cartItem = document.createElement('div');
+
+        cartItem.className = 'cart-item';
+
+        cartItem.innerHTML = `
+
+          <div class="cart-item-info">
+
+            <div class="cart-item-name">${item.product}</div>
+
+            <div class="cart-item-price">${item.price} ₽ × ${item.quantity} = ${itemTotal} ₽</div>
+
+          </div>
+
+          <div class="cart-item-actions">
+
+            <button onclick="updateQuantity('${item.product}', -1)">-</button>
+
+            <button onclick="updateQuantity('${item.product}', 1)">+</button>
+
+            <button onclick="removeFromCart('${item.product}')" style="color: #e74c3c; background:none; border:none; cursor:pointer; font-weight:bold;">✕</button>
+
+          </div>
+
+        `;
+
+        cartItemsDiv.appendChild(cartItem);
+
+      });
+
+      document.getElementById('cart-total').innerText = `Итого: ${total} ₽`;
+
+    }
+
+   
+
+    function saveCartToStorage() {
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+    }
+
+   
+
+    function checkout() {
+
+      if (!currentUser) {
+
+        alert('Для оформления заказа необходимо войти в систему');
+
+        showModal(loginModal);
+
+        return;
+
+      }
+
+     
+
+      if (cart.length === 0) {
+
+        alert('Ваша корзина пуста');
+
+        return;
+
+      }
+
+     
+
+      let totalSum = 0;
+
+      let totalWeight = 0;
+
+      let itemsNames = [];
+
+     
+
+      cart.forEach(item => {
+
+        totalSum += item.price * item.quantity;
+
+        totalWeight += item.quantity;
+
+        itemsNames.push(`${item.product} (${item.quantity} шт)`);
+
+      });
+
+
+
+      const newOrder = {
+
+        id: "#" + Math.floor(10000 + Math.random() * 90000),
+
+        date: new Date().toLocaleDateString('ru-RU'),
+
+        products: itemsNames.join(', '),
+
+        weight: totalWeight + ".0 кг",
+
+        total: totalSum.toLocaleString('ru-RU') + " руб.",
+
+        status: "В обработке"
+
+      };
+
+
+
+      let ordersDB = JSON.parse(localStorage.getItem('ordersDB') || '{}');
+
+     
+
+      if (!ordersDB[currentUser.email]) {
+
+        ordersDB[currentUser.email] = [];
+
+      }
+
+     
+
+      ordersDB[currentUser.email].unshift(newOrder);
+
+      localStorage.setItem('ordersDB', JSON.stringify(ordersDB));
+
+     
+
+      alert(`Заказ ${newOrder.id} успешно оформлен! Посмотреть его можно в Личном кабинете (ЛК).`);
+
+      clearCart();
+
+      closeCart();
+
+    }
+
+   
+
+    function showModal(modal) {
+
+      modal.classList.add('active');
+
+      overlay.style.display = 'block';
+
+      document.body.style.overflow = 'hidden';
+
+    }
+
+   
+
+    function closeModal(modal) {
+
+      modal.classList.remove('active');
+
+      overlay.style.display = 'none';
+
+      document.body.style.overflow = 'auto';
+
+    }
+
+   
+
+    function closeAllModals() {
+
+      closeModal(loginModal);
+
+      closeModal(registerModal);
+
+    }
+
+   
+
+    function closeCart() {
+
+      cartDiv.classList.remove('active');
+
+      overlay.style.display = 'none';
+
+      document.body.style.overflow = 'auto';
+
+    }
+
+   
+
+    function registerUser(username, email, password) {
+
+      let users = JSON.parse(localStorage.getItem('users') || '[]');
+
+      const existingUser = users.find(user => user.email === email);
+
+      if (existingUser) {
+
+        alert('Пользователь с таким email уже зарегистрирован');
+
+        return false;
+
+      }
+
+     
+
+      const newUser = { id: Date.now(), username, email, password };
+
+      users.push(newUser);
+
+      localStorage.setItem('users', JSON.stringify(users));
+
+     
+
+      currentUser = newUser;
+
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+      updateUserStatus();
+
+      alert('Регистрация прошла успешно!');
+
+      return true;
+
+    }
+
+   
+
+    function loginUser(email, password) {
+
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+      const user = users.find(user => user.email === email && user.password === password);
+
+     
+
+      if (user) {
+
+        currentUser = user;
+
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        updateUserStatus();
+
+        return true;
+
+      }
+
+      alert('Неверный email или пароль');
+
+      return false;
+
+    }
+
+   
+
+    function logoutUser() {
+
+      currentUser = null;
+
+      localStorage.removeItem('currentUser');
+
+      updateUserStatus();
+
+    }
+
+   
+
+    function updateUserStatus() {
+
+      if (currentUser) {
+
+        authButtons.classList.add('hidden');
+
+        userInfo.classList.remove('hidden');
+
+        usernameDisplay.textContent = currentUser.username;
+
+        userAvatar.textContent = currentUser.username.charAt(0).toUpperCase();
+
+      } else {
+
+        authButtons.classList.remove('hidden');
+
+        userInfo.classList.add('hidden');
+
+      }
+
+    }
+
+   
+
+    cartToggle.addEventListener('click', (e) => {
+
+      e.preventDefault();
+
+      cartDiv.classList.toggle('active');
+
+      const isActive = cartDiv.classList.contains('active');
+
+      overlay.style.display = isActive ? 'block' : 'none';
+
+      document.body.style.overflow = isActive ? 'hidden' : 'auto';
+
+    });
+
+   
+
+    closeCartBtn.addEventListener('click', closeCart);
+
+    overlay.addEventListener('click', () => {
+
+      closeCart();
+
+      closeAllModals();
+
+    });
+
+   
+
+    menuToggle.addEventListener('click', () => {
+
+      menuToggle.classList.toggle('active');
+
+      navMenu.classList.toggle('active');
+
+    });
+
+   
+
+    loginButton.addEventListener('click', (e) => {
+
+      e.preventDefault();
+
+      showModal(loginModal);
+
+    });
+
+   
+
+    registerButton.addEventListener('click', (e) => {
+
+      e.preventDefault();
+
+      showModal(registerModal);
+
+    });
+
+   
+
+    closeLogin.addEventListener('click', () => closeModal(loginModal));
+
+    closeRegistration.addEventListener('click', () => closeModal(registerModal));
+
+   
+
+    showRegister.addEventListener('click', (e) => {
+
+      e.preventDefault();
+
+      closeModal(loginModal);
+
+      showModal(registerModal);
+
+    });
+
+   
+
+    showLogin.addEventListener('click', (e) => {
+
+      e.preventDefault();
+
+      closeModal(registerModal);
+
+      showModal(loginModal);
+
+    });
+
+   
+
+    loginForm.addEventListener('submit', (e) => {
+
+      e.preventDefault();
+
+      const email = document.getElementById('login-email').value;
+
+      const password = document.getElementById('login-password').value;
+
+      if (loginUser(email, password)) closeModal(loginModal);
+
+    });
+
+   
+
+    registerForm.addEventListener('submit', (e) => {
+
+      e.preventDefault();
+
+      const username = document.getElementById('reg-username').value;
+
+      const email = document.getElementById('reg-email').value;
+
+      const password = document.getElementById('reg-password').value;
+
+      if (registerUser(username, email, password)) closeModal(registerModal);
+
+    });
+
+   
+
+    logoutButton.addEventListener('click', logoutUser);
+
+   
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+      anchor.addEventListener('click', function(e) {
+
+        const targetId = this.getAttribute('href');
+
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+
+          e.preventDefault();
+
+          window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+
+          if (navMenu.classList.contains('active')) {
+
+            menuToggle.classList.remove('active');
+
+            navMenu.classList.remove('active');
+
+          }
+
+        }
+
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html> 
+

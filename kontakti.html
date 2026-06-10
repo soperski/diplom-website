@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты - Морепродукты Релгрос</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #2c3e50;
+    }
+    
+    .logo span {
+      color: #3498db;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    
+    #nav-menu {
+      display: flex;
+    }
+    
+    #nav-menu a {
+      margin-left: 2rem;
+      font-weight: 600;
+      position: relative;
+      padding: 8px 0;
+    }
+    
+    #nav-menu a:hover {
+      color: #3498db;
+    }
+    
+    .contact-hero {
+      background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), 
+                  url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+    }
+    
+    .contact-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+    
+    .contact-info, .contact-form, .map-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+    }
+    
+    .contact-info h2, .contact-form h2, .map-container h2 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 3px solid #3498db;
+      display: inline-block;
+    }
+    
+    .info-block {
+      margin-bottom: 1.8rem;
+    }
+    
+    .info-block h3 {
+      color: #3498db;
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+    }
+    
+    .info-block p, .info-block a {
+      margin: 0.5rem 0;
+      display: block;
+      font-size: 1.1rem;
+    }
+    
+    .info-block a {
+      color: #2c3e50;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .info-block a:hover {
+      color: #3498db;
+      text-decoration: underline;
+    }
+    
+    .work-hours {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    
+    .form-group textarea {
+      height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: #3498db;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 5px;
+    }
+    
+    .additional-contacts {
+      background: #2c3e50;
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+    
+    .additional-contacts h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .contact-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .contact-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #3498db;
+    }
+    
+    .contact-card h3 {
+      margin-bottom: 1rem;
+    }
+    
+    .contact-card p {
+      font-size: 1.1rem;
+    }
+    
+    footer {
+      background-color: #506f8b;
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    
+    @media (max-width: 768px) {
+      .contact-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container nav-wrapper">
+      <div class="logo">Рел<span>грос</span></div>
+      <nav id="nav-menu">
+        <a href="index.html">Главная</a>
+        <a href="#products">Товары</a>
+        <a href="#about">О компании</a>
+        <a href="kontakti.html" style="color: #3498db;">Контакты</a>
+        <a href="FAQ.html">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="contact-hero">
+    <div class="container">
+      <h1>Наши контакты</h1>
+      <p>Мы всегда рады помочь вам и ответить на все вопросы</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="contact-content">
+      <div class="contact-info">
+        <h2>Контактная информация</h2>
+        
+        <div class="info-block">
+          <h3>Наш адрес</h3>
+          <p>г. Кемерово, ул. Красноармейская, д. 41</p>
+        </div>
+        
+        <div class="info-block">
+          <h3>Телефоны</h3>
+          <a href="tel:+74954303291">+7 (495) 430-32-91</a>
+          <a href="tel:+74957654321">+7 (495) 765-43-21</a>
+        </div>
+        
+        <div class="info-block">
+          <h3>Рабочее время</h3>
+          <div class="work-hours">
+            <p>Пн — Пт:</p>
+            <p>9:00 — 18:00</p>
+            <p>Сб:</p>
+            <p>10:00 — 16:00</p>
+            <p>Вс:</p>
+            <p>выходной</p>
+          </div>
+        </div>
+        
+        <div class="info-block">
+          <h3>Электронная почта</h3>
+          <a href="mailto:info@relgros.ru">info@relgros.ru</a>
+          <a href="mailto:sales@relgros.ru">sales@relgros.ru</a>
+        </div>
+        
+        <div class="info-block">
+          <h3>Социальные сети</h3>
+          <div style="display: flex; gap: 15px; margin-top: 15px;">
+            <a href="#" style="font-size: 1.8rem;"><i class="fab fa-vk"></i></a>
+            <a href="#" style="font-size: 1.8rem;"><i class="fab fa-telegram"></i></a>
+            <a href="#" style="font-size: 1.8rem;"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form">
+        <h2>Свяжитесь с нами</h2>
+        <form>
+          <div class="form-group">
+            <label for="name">Ваше имя</label>
+            <input type="text" id="name" placeholder="Иван Иванов">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="example@mail.ru">
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" placeholder="+7 (999) 999-99-99">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" placeholder="Ваше сообщение..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Отправить сообщение</button>
+        </form>
+      </div>
+      
+      <div class="map-container">
+        <h2>Мы на карте</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1272.965680775117!2d86.05310452028368!3d55.35508983492132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42d80b93ed705cad%3A0xdbc543713caa231c!2z0YPQuy4g0JrRgNCw0YHQvdC-0LDRgNC80LXQudGB0LrQsNGPLCA0MSwg0JrQtdC80LXRgNC-0LLQviwg0JrQtdC80LXRgNC-0LLRgdC60LDRjyDQvtCx0LsuLCA2NTAwMTA!5e0!3m2!1sru!2sru!4v1749361818632!5m2!1sru!2sru" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <section class="additional-contacts">
+    <div class="container">
+      <h2>Другие способы связи</h2>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <i class="fas fa-headset"></i>
+          <h3>Техподдержка</h3>
+          <p>support@relgros.ru</p>
+          <p>+7 (495) 123-45-67</p>
+        </div>
+        
+        <div class="contact-card">
+          <i class="fas fa-truck"></i>
+          <h3>Отдел доставки</h3>
+          <p>delivery@relgros.ru</p>
+          <p>+7 (495) 765-43-21</p>
+        </div>
+        
+        <div class="contact-card">
+          <i class="fas fa-file-invoice-dollar"></i>
+          <h3>Бухгалтерия</h3>
+          <p>accounting@relgros.ru</p>
+          <p>+7 (495) 987-65-43</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<footer>
+    &copy; 2025 «Релгрос». Все права защищены.
+  </footer>
+
+</body>
+</html>

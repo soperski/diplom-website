@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный кабинет - ООО Релгрос</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Фикс ломающегося статуса и улучшение дизайна таблицы */
+    .custom-orders-table tbody tr.clickable-order-row {
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .custom-orders-table tbody tr.clickable-order-row:hover {
+      background-color: #f8fafc;
+    }
+    .status-badge-custom {
+      display: inline-block;
+      white-space: nowrap; /* Запрещаем перенос текста, как на картинке image_8dc69d.png */
+      background: #f39c12; 
+      color: #fff; 
+      padding: 5px 12px; 
+      border-radius: 20px; /* Делаем красивую скругленную пилюлю */
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(243, 156, 18, 0.2);
+    }
+    .expanded-order-details {
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-wrapper">
+      <div class="logo">Рел<span>грос</span></div>
+      <nav id="nav-menu">
+        <a href="index.html#products">Товары</a>
+        <a href="index.html#about">О компании</a>
+        <a href="kontakti.html">Контакты</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="sitemap.html">Карта сайта</a>
+        <a href="index.html" style="color: #0077b6;">На главную</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" style="margin-top: 3rem; margin-bottom: 3rem;">
+    <div class="lk-grid-container">
+      
+      <div class="profile-card-box">
+        <div class="profile-header-main">
+          <div class="avatar-circle" id="lk-avatar">K</div>
+          <div class="profile-meta-title">
+            <h2 id="lk-username">Пользователь</h2>
+            <p>Статус: Покупатель</p>
+          </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">
+        
+        <form id="lk-profile-form">
+          <div class="form-item-block">
+            <label>ФИО</label>
+            <input type="text" id="lk-fio" placeholder="Введите ваше ФИО">
+          </div>
+          <div class="form-item-block">
+            <label>Email</label>
+            <input type="email" id="lk-email" readonly style="background-color: #f1f5f9; cursor: not-allowed;">
+          </div>
+          <div class="form-item-block">
+            <label>Телефон</label>
+            <input type="text" id="lk-phone" placeholder="+7 (999) 000-00-00">
+          </div>
+          <button type="submit" class="save-profile-btn">Сохранить изменения</button>
+        </form>
+      </div>
+
+      <div class="orders-history-box" id="orders-history">
+        <h3>История ваших заказов</h3>
+        <div style="overflow-x: auto;">
+          <table class="custom-orders-table">
+            <thead>
+              <tr>
+                <th>№ Заказа</th>
+                <th>Дата заказа</th>
+                <th>Продукция</th>
+                <th>Вес</th>
+                <th>Сумма</th>
+                <th>Статус</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleOrderRow(id) {
+      const row = document.getElementById(id);
+      if (row) {
+        if (row.style.display === 'none' || row.style.display === '') {
+          row.style.display = 'table-row';
+        } else {
+          row.style.display = 'none';
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedUser = localStorage.getItem('currentUser');
+      if (!savedUser) {
+        alert("Для просмотра ЛК необходимо авторизоваться!");
+        window.location.href = "index.html";
+        return;
+      }
+      
+      const currentUser = JSON.parse(savedUser);
+      
+      const lkAvatar = document.getElementById('lk-avatar');
+      const lkUsername = document.getElementById('lk-username');
+      const lkFioInput = document.getElementById('lk-fio');
+      const lkEmailInput = document.getElementById('lk-email');
+      const lkPhoneInput = document.getElementById('lk-phone');
+      
+      if (lkUsername) lkUsername.textContent = currentUser.username;
+      if (lkAvatar) lkAvatar.textContent = currentUser.username.charAt(0).toUpperCase();
+      if (lkEmailInput) lkEmailInput.value = currentUser.email;
+      
+      if (currentUser.fio) lkFioInput.value = currentUser.fio;
+      if (currentUser.phone) lkPhoneInput.value = currentUser.phone;
+      
+      document.getElementById('lk-profile-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        currentUser.fio = lkFioInput.value;
+        currentUser.phone = lkPhoneInput.value;
+        
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+        const userIndex = users.findIndex(u => u.email === currentUser.email);
+        if (userIndex !== -1) {
+          users[userIndex].fio = lkFioInput.value;
+          users[userIndex].phone = lkPhoneInput.value;
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+        
+        alert('Данные профиля успешно обновлены!');
+      });
+      
+      const tbody = document.getElementById('orders-tbody');
+      if (tbody) {
+        const ordersDB = JSON.parse(localStorage.getItem('ordersDB') || '{}');
+        const userOrders = ordersDB[currentUser.email] || [];
+        
+        if (userOrders.length > 0) {
+          tbody.innerHTML = ''; 
+          
+          userOrders.forEach((order, index) => {
+            const detailId = `order-details-${index}`;
+            
+            const row = document.createElement('tr');
+            row.className = 'clickable-order-row';
+            row.setAttribute('onclick', `toggleOrderRow('${detailId}')`);
+            row.innerHTML = `
+              <td><strong>${order.id}</strong></td>
+              <td>${order.date}</td>
+              <td style="max-width: 250px; word-wrap: break-word;">${order.products}</td>
+              <td>${order.weight}</td>
+              <td style="white-space: nowrap;">${order.total}</td>
+              <td><span class="status-badge-custom">${order.status}</span></td>
+            `;
+            
+            const detailsRow = document.createElement('tr');
+            detailsRow.id = detailId;
+            detailsRow.className = 'hidden-details-row';
+            detailsRow.style.display = 'none';
+            detailsRow.innerHTML = `
+              <td colspan="6">
+                <div class="expanded-order-details" style="padding: 15px; background: #f8fafc; border-left: 4px solid #f39c12; margin: 5px 0; border-radius: 0 8px 8px 0;">
+                  <p style="margin: 0 0 8px 0;"><strong>Адрес доставки:</strong> Указан при подтверждении менеджером</p>
+                  <p style="margin: 0;"><strong>Способ оплаты:</strong> Наличными или картой при получении</p>
+                </div>
+              </td>
+            `;
+            
+            tbody.appendChild(row);
+            tbody.appendChild(detailsRow);
+          });
+        } else {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color: #718096;">Вы еще не совершали заказов.</td></tr>';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
