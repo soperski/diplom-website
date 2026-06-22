@@ -412,24 +412,27 @@
     }
     
     /* Корзина */
-    .cart {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 100%;
-      max-width: 400px;
-      height: 100vh;
-      background: white;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-      padding: 2rem;
-      z-index: 2000;
-      transition: var(--transition);
-      overflow-y: auto;
-    }
-    
-    .cart.active {
-      right: 0;
-    }
+.cart {
+  position: fixed;
+  top: 0;
+  right: 0; /* Всегда к правому краю */
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  background: white;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  z-index: 2000;
+  transition: var(--transition);
+  overflow-y: auto;
+  
+  transform: translateX(100%); 
+}
+
+/* Когда корзина открывается */
+.cart.active {
+  transform: translateX(0); 
+}
     
     .cart h3 {
       display: flex;
