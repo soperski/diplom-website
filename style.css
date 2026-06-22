@@ -1,3 +1,7 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* Жестко режет всё, что пытается вылезти справа или слева */
+}
 .products {
       max-width: 1200px;
       margin: 2rem auto;
